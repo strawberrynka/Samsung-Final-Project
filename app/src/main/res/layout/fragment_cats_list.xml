@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_cats_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,5 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tv_cat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CustomTextStyle"/>
+
+        <ImageView
+            android:id="@+id/iv_cat_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_cat_name"/>
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

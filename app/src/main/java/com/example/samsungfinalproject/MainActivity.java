@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,25 +14,34 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView coinsView = findViewById(R.id.coins_text_view);
-        //coinsView.setBackgroundResource(R.drawable.coins);
-        //coinsView.setText("100"); // устанавливает количество монет равным 100
-//        ImageButton catsButton = findViewById(R.id.cats_button);
-//        catsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CatsListFragment fragment = new CatsListFragment();
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_cats_list, fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
+
+        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+//        TextView coinsView = findViewById(R.id.coins_text_view);
+//        coinsView.setBackgroundResource(R.drawable.coins);
+//        coinsView.setText("100"); // устанавливает количество монет равным 100
+
+        ImageButton catsButton = findViewById(R.id.cats_button);
+
+        catsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CatsListFragment fragment = new CatsListFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_cats_list, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         ImageButton settingsButton = findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(v -> {
             SettingsFragment fragment = new SettingsFragment();
@@ -43,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
-
-
 
 
 

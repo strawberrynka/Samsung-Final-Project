@@ -1,13 +1,13 @@
 package com.example.samsungfinalproject;
 
 public class Cat {
-    private int id;
-    private String name;
-    private String gender;
-    private String breed;
-    private int health;
-    private int satiety;
-    private int happiness;
+    public int id;
+    public String name;
+    public String gender;
+    public String breed;
+    public int health;
+    public int satiety;
+    public int happiness;
 
     public Cat(int id, String name, String gender, String breed, int health, int satiety, int happiness) {
         this.id = id;
