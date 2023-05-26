@@ -26,7 +26,7 @@ public class CatsListFragment extends Fragment {
         // Настройка RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ArrayList<Cat> cats = new ArrayList<>();
-        cats.add(new Cat("Pusheen"));
+        //cats.add(new Cat("Pusheen"));
 //        cats.add(new Cat("Liza"));
 //        cats.add(new Cat("Chang Sheng"));
 

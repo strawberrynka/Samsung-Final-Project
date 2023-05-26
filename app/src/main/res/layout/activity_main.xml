@@ -50,7 +50,6 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
-                android:text="256"
                 android:textColor="@color/brown" />
 
         </FrameLayout>
@@ -87,13 +86,13 @@
 
             <ImageButton
                 android:id="@+id/cats_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/cats"
-                />
+                app:srcCompat="@drawable/cats" />
 
             <TextView
+                android:id="@+id/textViewOwnedCatCount"
                 style="@style/CustomTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +100,6 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
-                android:text="1"
                 android:textColor="@color/brown" />
 
         </FrameLayout>
@@ -130,6 +128,5 @@
         android:id="@+id/settings_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

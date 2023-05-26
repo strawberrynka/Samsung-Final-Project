@@ -2,21 +2,28 @@ package com.example.samsungfinalproject;
 
 public class Cat {
     public int id;
+
     public String name;
     public String gender;
-    public String breed;
+    private String imagePath;
+
+    private int x;
+    private int y;
+
     public int health;
     public int satiety;
     public int happiness;
 
-    public Cat(int id, String name, String gender, String breed, int health, int satiety, int happiness) {
+    public Cat(int id, String name, String gender, int health, int satiety, int happiness, String imagePath) {
         this.id = id;
         this.name = name;
         this.gender = gender;
-        this.breed = breed;
+        x = 180;
+        y = 400;
         this.health = health;
         this.satiety = satiety;
         this.happiness = happiness;
+        this.imagePath = imagePath;
     }
 
     public int getId() {
@@ -31,9 +38,7 @@ public class Cat {
         return gender;
     }
 
-    public String getBreed() {
-        return breed;
-    }
+    public String getImagePath() { return imagePath; }
 
     public int getHealth() {
         return health;
@@ -71,4 +76,5 @@ public class Cat {
         health += 5;
         happiness += 5;
     }
+
 }
