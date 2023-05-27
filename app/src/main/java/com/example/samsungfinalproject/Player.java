@@ -4,15 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
-
 public class Player {
     private int coins;
     private int diamonds;
-    private int fur;
+    public int fur;
     private int woolItems;
     private int cats;
-    private List<Integer> catIds;
 
     private SQLiteDatabase database;
     private MyDatabaseHelper dbHelper;
@@ -21,7 +18,7 @@ public class Player {
 
 
     public Player(Context context) {
-        dbHelper = new MyDatabaseHelper(context);
+        dbHelper = new MyDatabaseHelper(context, this);
         database = dbHelper.getWritableDatabase();
         //loadPlayerData();
     }
@@ -46,12 +43,11 @@ public class Player {
         return cats;
     }
 
-    public List<Integer> getCatIds() { return catIds; }
-
     public void addCoins(int amount) {
         coins += amount;
         savePlayerData();
     }
+
 
     public void addDiamonds(int amount) {
         diamonds += amount;
@@ -75,9 +71,9 @@ public class Player {
 
     private int ownedCatCount;
 
-    public int getOwnedCatCount() {
-        return ownedCatCount;
-    }
+//    public int getOwnedCatCount() {
+//        return ownedCatCount;
+//    }
 
     public void incrementOwnedCatCount() {
         ownedCatCount++;
@@ -114,7 +110,6 @@ public class Player {
         values.put("fur", fur);
         values.put("woolItems", woolItems);
         values.put("cats", cats);
-        values.put("cat_ids", String.valueOf(catIds));
         database.update("player_data", values, null, null);
     }
 

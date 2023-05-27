@@ -1,4 +1,4 @@
-package com.example.samsungfinalproject;
+package com.example.samsungfinalproject;//package com.example.samsungfinalproject;
 
 public class Cat {
     public int id;
@@ -14,15 +14,17 @@ public class Cat {
     public int satiety;
     public int happiness;
 
-    public Cat(int id, String name, String gender, int health, int satiety, int happiness, String imagePath) {
+    public Player player;
+
+    public Cat(int id, String name, String gender, String imagePath) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         x = 180;
         y = 400;
-        this.health = health;
-        this.satiety = satiety;
-        this.happiness = happiness;
+        this.health = 100;
+        this.satiety = 50;
+        this.happiness = 50;
         this.imagePath = imagePath;
     }
 
@@ -73,8 +75,8 @@ public class Cat {
     }
 
     public void clean() {
-        health += 5;
         happiness += 5;
+        player.addCoins(10);
     }
 
 }

@@ -1,41 +1,44 @@
 package com.example.samsungfinalproject;
 
+// CatsListFragment.java
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CatsListFragment extends Fragment {
 
-    public CatsListFragment() {
-        // Required empty public constructor
-    }
+    private ListView listViewCats;
+    private CatAdapter catAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cats_list, container, false);
 
-        // Настройка RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        ArrayList<Cat> cats = new ArrayList<>();
-        //cats.add(new Cat("Pusheen"));
-//        cats.add(new Cat("Liza"));
-//        cats.add(new Cat("Chang Sheng"));
+        // Получите список котов из базы данных или любого другого источника данных
+        List<Cat> cats = getCatList();
 
-        CatsAdapter adapter = new CatsAdapter(cats);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // Создайте адаптер и установите его для ListView
+        catAdapter = new CatAdapter(requireContext(), cats);
+        listViewCats = view.findViewById(R.id.list_view_cats);
+        listViewCats.setAdapter(catAdapter);
 
         return view;
     }
 
+    // Метод для получения списка котов (замените данными из вашей базы данных)
+    private List<Cat> getCatList() {
+        List<Cat> cats = new ArrayList<>();
+        // Здесь добавьте логику для получения списка котов из вашей базы данных
+        // и создайте объекты Cat, содержащие имя, пол и фото каждого кота
+        // и добавьте их в список cats
+        return cats;
+    }
 }

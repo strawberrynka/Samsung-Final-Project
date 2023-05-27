@@ -22,6 +22,18 @@
         app:srcCompat="@drawable/house"
         tools:ignore="MissingConstraints" />
 
+    <ImageButton
+        android:id="@+id/petting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/hand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="128dp"
+        android:layout_marginStart="32dp" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +139,30 @@
     <FrameLayout
         android:id="@+id/settings_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/cats_layouts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView0"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/tile000"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,8 +26,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DIAMONDS = "diamonds";
     private static final String COLUMN_FUR = "fur";
     private static final String COLUMN_WOOL_ITEMS = "wool_items";
-    private static final String COLUMN_CATS = "cats";
-    private static final String KEY_CAT_IDS = "cat_ids";
+    private static final String COLUMN_CATS = "cats";;
 
     // Создание таблицы Cats
     private static final String CREATE_TABLE_CATS = "CREATE TABLE " + TABLE_CATS + "("
@@ -43,11 +42,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_DIAMONDS + " INTEGER, "
             + COLUMN_FUR + " INTEGER, "
             + COLUMN_WOOL_ITEMS + " INTEGER, "
-            + COLUMN_CATS + " INTEGER, "
-            + KEY_CAT_IDS + " TEXT"
+            + COLUMN_CATS + " INTEGER"
             + ")";
 
-    public MyDatabaseHelper(Context context) {
+    public MyDatabaseHelper(Context context, Player player) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.player = player;
     }
@@ -67,9 +65,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     };
 
     private static String[] CAT_IMAGE_PATHS = {
-            "tile000.png",
-            "tile001.png",
-            "tile002.png"
+            "@drawable/tile000.png",
+            "@drawable/tile001.png",
+            "@drawable/tile002.png"
     };
 
     @Override
@@ -94,6 +92,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_IMAGE_PATH, CAT_IMAGE_PATHS[0]);
         db.insert(TABLE_CATS, null, values);
 
+        // Увеличение счетчика в классе Player
+        player.incrementOwnedCatCount();
+
         //убираем первый элемент
         for(int i = 0; i < CAT_NAMES.length - 1; i++) {
             CAT_NAMES[i] = CAT_NAMES[i + 1];
@@ -104,11 +105,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         CAT_GENDERS = Arrays.copyOf(CAT_GENDERS, CAT_NAMES.length - 1);
         CAT_GENDERS = Arrays.copyOf(CAT_GENDERS, CAT_NAMES.length - 1);
 
-        // Увеличение счетчика в классе Player
-        player.incrementOwnedCatCount();
-
-
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -131,13 +130,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 //        db.close();
 //    }
 
-    private void addCatToPlayer(long catId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_CATS, catId);
-        db.update(TABLE_PLAYER_DATA, values, null, null);
-        db.close();
-    }
+//    private void addCatToPlayer(long catId) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(COLUMN_CATS, catId);
+//        db.update(TABLE_PLAYER_DATA, values, null, null);
+//        db.close();
+//    }
 
     // Метод для получения количества монет из базы данных
     public int getCoinCount() {
@@ -168,5 +167,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         return coinCount;
     }
+
 
 }

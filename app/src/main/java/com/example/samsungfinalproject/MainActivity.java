@@ -1,19 +1,18 @@
 package com.example.samsungfinalproject;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    // Метод для конвертации dp в пиксели
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
+    }
 
 
 
@@ -43,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
         // Создание объекта Context
         Context context = getApplicationContext();
 
+        // Создаем намерение для запуска MusicService
+        Intent intent = new Intent(this, MusicService.class);
+        intent.setAction(MusicService.ACTION_PLAY);
+        startService(intent);
+
         player = new Player(context);
-        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
+        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, player);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-
-        int ownedCatCount = player.getOwnedCatCount();
 
 
 
@@ -59,10 +64,22 @@ public class MainActivity extends AppCompatActivity {
         updateCoinCount(dbHelper, db);
 //        coinsView.setText(coinCount); // устанавливает количество монет равным 100
 
-        TextView textViewOwnedCatCount = findViewById(R.id.textViewOwnedCatCount);
-        textViewOwnedCatCount.setText(String.valueOf(ownedCatCount));
+        //TextView textViewOwnedCatCount = findViewById(R.id.textViewOwnedCatCount);
+        //textViewOwnedCatCount.setText(String.valueOf(ownedCatCount));
 
         ImageButton catsButton = findViewById(R.id.cats_button);
+
+        ImageButton pettingButton = findViewById(R.id.petting_button);
+
+// Назначение обработчика щелчка кнопки
+        pettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Воспроизведение звука при нажатии
+                MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.meow);
+                mediaPlayer.start();
+            }
+        });
 
         catsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 CatsListFragment fragment = new CatsListFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_cats_list, fragment);
+                fragmentTransaction.replace(R.id.list_view_cats, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -87,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //dbHelper.addCat("Whiskers", "Male", "tile000.png");
-
     }
 
 
@@ -96,18 +111,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

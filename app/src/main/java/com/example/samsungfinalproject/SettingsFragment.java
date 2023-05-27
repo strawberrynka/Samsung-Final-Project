@@ -1,19 +1,22 @@
 package com.example.samsungfinalproject;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+
+import androidx.fragment.app.Fragment;
 
 public class SettingsFragment extends Fragment {
 
     private Switch musicSwitch, soundSwitch;
+
+    private MediaPlayer mediaPlayer;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -25,24 +28,52 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, null);
 
+        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.music);
+        mediaPlayer.setLooping(true);
+
         ImageButton buttonDone = view.findViewById(R.id.button_done);
         buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Создаем намерение для перехода на MainActivity
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                // Запускаем новую активность
                 startActivity(intent);
-                // Закрываем текущую активность
                 getActivity().finish();
             }
         });
 
-
-        // Находим переключатели в макете
         musicSwitch = view.findViewById(R.id.music_switch);
         soundSwitch = view.findViewById(R.id.sound_switch);
 
+        musicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // Запуск воспроизведения музыки
+                    mediaPlayer.start();
+                } else {
+                    // Остановка воспроизведения музыки
+                    mediaPlayer.pause();
+                }
+            }
+        });
+
         return view;
     }
+
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        // Остановка проигрывания музыки
+        stopMusic();
+    }
+
+    private void stopMusic() {
+        // Остановка музыки
+        Intent intent = new Intent(getActivity(), MusicService.class);
+        getActivity().stopService(intent);
+    }
+
 }
