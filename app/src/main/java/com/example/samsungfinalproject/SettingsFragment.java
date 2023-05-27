@@ -19,13 +19,13 @@ public class SettingsFragment extends Fragment {
     private MediaPlayer mediaPlayer;
 
     public SettingsFragment() {
-        // Required empty public constructor
+        // нужен пустой public конструктор
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_settings, null);
 
         mediaPlayer = MediaPlayer.create(getActivity(), R.raw.music);
@@ -48,10 +48,10 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // Запуск воспроизведения музыки
+
                     mediaPlayer.start();
                 } else {
-                    // Остановка воспроизведения музыки
+
                     mediaPlayer.pause();
                 }
             }
@@ -66,7 +66,7 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
-        // Остановка проигрывания музыки
+
         stopMusic();
     }
 

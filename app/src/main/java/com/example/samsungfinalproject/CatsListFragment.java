@@ -22,10 +22,10 @@ public class CatsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cats_list, container, false);
 
-        // Получите список котов из базы данных или любого другого источника данных
+        // список котов из базы данных
         List<Cat> cats = getCatList();
 
-        // Создайте адаптер и установите его для ListView
+        // адаптер и ListView
         catAdapter = new CatAdapter(requireContext(), cats);
         listViewCats = view.findViewById(R.id.list_view_cats);
         listViewCats.setAdapter(catAdapter);
@@ -33,12 +33,10 @@ public class CatsListFragment extends Fragment {
         return view;
     }
 
-    // Метод для получения списка котов (замените данными из вашей базы данных)
+    // Метод для получения списка котов
     private List<Cat> getCatList() {
         List<Cat> cats = new ArrayList<>();
-        // Здесь добавьте логику для получения списка котов из вашей базы данных
-        // и создайте объекты Cat, содержащие имя, пол и фото каждого кота
-        // и добавьте их в список cats
+
         return cats;
     }
 }

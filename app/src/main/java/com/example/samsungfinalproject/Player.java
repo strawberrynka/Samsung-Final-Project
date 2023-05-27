@@ -91,7 +91,7 @@ public class Player {
 //            woolItems = cursor.getInt(cursor.getColumnIndex("woolItems"));
 //            cats = cursor.getInt(cursor.getColumnIndex("cats"));
 //        } else {
-//            // Если записей в таблице нет, установите начальные значения
+//            // Если записей в таблице нет, установить начальные значения
 //            coins = 500; // Начальное значение баланса монет
 //            diamonds = 4;
 //            fur = 0;

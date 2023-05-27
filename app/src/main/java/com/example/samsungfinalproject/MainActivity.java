@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCoinCount(MyDatabaseHelper dbHelper, SQLiteDatabase db) {
 
         int coinCount = dbHelper.getCoinCount();
-        // Обновите текстовое поле или элемент интерфейса пользователя с количеством монет
+        // Обновление текстового поля с количеством монет
         TextView coinsView = findViewById(R.id.coins_text_view);
         coinsView.setText(String.valueOf(coinCount));
     }
@@ -43,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Создание объекта Context
         Context context = getApplicationContext();
 
-        // Создаем намерение для запуска MusicService
+        // запуск MusicService
         Intent intent = new Intent(this, MusicService.class);
         intent.setAction(MusicService.ACTION_PLAY);
         startService(intent);
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton pettingButton = findViewById(R.id.petting_button);
 
-// Назначение обработчика щелчка кнопки
         pettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

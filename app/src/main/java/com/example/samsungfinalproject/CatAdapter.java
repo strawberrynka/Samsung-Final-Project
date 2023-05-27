@@ -39,8 +39,8 @@ public class CatAdapter extends ArrayAdapter<Cat> {
         catNameTextView.setText(cat.getName());
         catGenderTextView.setText(cat.getGender());
 
-        String imagePath = cat.getImagePath(); // Получение пути к изображению
-        Picasso.get().load(new File(imagePath)).into(catImageView); // Загрузка и установка изображения с помощью Picasso
+        String imagePath = cat.getImagePath();
+        Picasso.get().load(new File(imagePath)).into(catImageView);
 
         return convertView;
     }

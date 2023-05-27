@@ -46,13 +46,13 @@ public class MusicService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // Освобождаем ресурсы MediaPlayer при уничтожении сервиса
+        // Освобождает ресурсы MediaPlayer при уничтожении сервиса
         mediaPlayer.release();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        // Метод не используется, возвращаем null
+        // пока не нужно
         return null;
     }
 }
